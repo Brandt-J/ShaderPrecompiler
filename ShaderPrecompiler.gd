@@ -24,6 +24,12 @@ func _process(_delta: float) -> void:
 
 func _recursive_get_materials(node: Node) -> void:
 	for child in node.get_children():
+		if child is CSGPrimitive:
+			if is_instance_valid(child.material):
+				var mat = child.material
+				_add_material(mat)
+				_foundMaterials.append(mat)
+		
 		if child is MeshInstance:
 			var mesh: MeshInstance = child as MeshInstance
 			
